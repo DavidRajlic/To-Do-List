@@ -8,6 +8,9 @@ function ToDoList() {
     const [inputValue, setInputValue] = useState("");
 
 
+    const deleteTask = (id) => {
+        setTasks(tasks.filter(task => task.id !== id));
+    };
 
     return (
     <div>
@@ -27,9 +30,12 @@ function ToDoList() {
     
       {tasks.length > 0 ? ( 
          <ul>
-         {tasks.map(task => (
-           <li key={task.id}> {task.name} </li>
-          
+         {tasks.map(task => ( 
+            <div>
+                <li key={task.id}> {task.name} </li>
+                <button onClick={() => deleteTask(task.id)}>DELETE</button>
+            </div>
+           
          ))}
          
        </ul>
