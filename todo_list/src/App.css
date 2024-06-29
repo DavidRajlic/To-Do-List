@@ -1,3 +1,8 @@
+body {
+  background-image: linear-gradient(to bottom right, #00C0FF, #4218B8);
+  height: 100vh;
+}
+
 .App {
   text-align: center;
 }
@@ -37,7 +42,80 @@
   }
 }
 
-.title {
+
+.container {
   display: flex;
   justify-content: center;
+  flex-direction: column;
+  margin: auto;
+  width: 30%;
+  border-radius: 5px;
+  padding: 20px;
 }
+
+.title {
+  text-align: center;
+  color: white;
+}
+
+
+.addTask {
+  display: flex;
+  justify-content: space-between;
+  width: 50%;
+  margin: auto;
+  margin-bottom: 3rem;
+ 
+}
+
+.checkbox {
+  
+}
+
+.deleteBtn {
+  background-color: red;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  color: white;
+  padding: 10px;
+}
+
+.taskBtn {
+  background-color: green;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  color: white;
+}
+
+.inputTask  input{
+  border: none;
+  background-color: #f0f0f0;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+/* App.css */
+.task {
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
+  padding: 10px;
+  margin-bottom: 1rem;
+  border-radius: 10px;
+  background-image: linear-gradient(to bottom right, #00C0FF, #4218B8);
+  border: none;
+}
+
+.taskName {
+  display: flex;
+  justify-content: flex-start;
+  color: white;
+  margin-right: 10px;
+  width: 70%;
+  overflow: hidden;       /* Skrije vsebino, ki presega element */
+  text-overflow: ellipsis; /* Dodaj tri pike (...) za presežek besedila */
+  white-space: nowrap;    /* Prepreči prelom besedila v novo vrstico */
+}
+

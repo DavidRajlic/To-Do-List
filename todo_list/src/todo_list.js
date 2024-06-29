@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { TextInput, Button, Checkbox, ListItem, UnorderedList, FluidForm } from 'carbon-components-react';
+import { TextInput, Button, Checkbox, UnorderedList } from 'carbon-components-react';
 import './App.css';
 
 const LOCAL_STORAGE_KEY = "tasks"
@@ -36,31 +36,47 @@ function ToDoList() {
   };
 
   return (
-    <div className="App">
+    <div className="container">
       <h1>To-Do List</h1>
+      <div className='addTask'>
       <TextInput
+        className="inputTask"
         id="task-input"
         placeholder="Insert task"
         labelText=""
         value={task}
         onChange={(e) => setTask(e.target.value)}
       />
-      <Button onClick={addTask}>Add Task</Button>
+      <Button kind="primary" className='taskBtn' onClick={addTask}>Add Task</Button>
+      </div>
+    
 
-      {tasks.length !== 0 ? (
-          tasks.map((task, index) => (
-            <ListItem key={index}>
-              {task.text}
-              <Checkbox
+      
+      {tasks.length > 0 ? (
+        <UnorderedList>
+          {tasks.map((task, index) => (
+            <div key={index} className="task">
+              <span className="taskName">{task.text}</span>
+              {task.completed ? (
+               <span>  ✔ </span>
+              )
+              : (
+                <Checkbox
+              className='checkbox'
                 id={`task-${index}`}
-                labelText={task.text}
+                labelText=""
                 checked={task.completed}
                 onChange={() => taskCompleted(index)}
+                style={{ borderRadius: '5px' }}
               />
-              <Button onClick={() => deleteTask(index)}>Delete</Button>
-            </ListItem>
-          ))
-       
+              )
+            }
+              
+              
+              <Button  className='deleteBtn'  onClick={() => deleteTask(index)}>Delete</Button>
+            </div>
+          ))}
+        </UnorderedList>
       ) : (
         <p>No tasks yet</p>
       )}
