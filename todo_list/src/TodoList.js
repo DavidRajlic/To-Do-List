@@ -24,6 +24,7 @@ function ToDoList() {
     if (task !== "") {
       setTasks([...tasks, { text: task, completed: false }]);
     }
+    setTask("");
   };
 
   const taskCompleted = (index) => {
