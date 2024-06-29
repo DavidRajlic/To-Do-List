@@ -7,20 +7,21 @@ import {
 } from "carbon-components-react";
 import "./App.css";
 
-const LOCAL_STORAGE_KEY = "tasks";
+const TASK_KEY = "tasks";
 
 function ToDoList() {
-  const [tasks, setTasks] = useState(() => {
-    return JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || [];
-  });
+  const [tasks, setTasks] = useState(
+    JSON.parse(localStorage.getItem(TASK_KEY)) || []
+  );
+
   const [task, setTask] = useState("");
 
   useEffect(() => {
-    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(tasks));
+    localStorage.setItem(TASK_KEY, JSON.stringify(tasks));
   }, [tasks]);
 
   const addTask = () => {
-    if (task.trim() !== "") {
+    if (task !== "") {
       setTasks([...tasks, { text: task, completed: false }]);
     }
   };
