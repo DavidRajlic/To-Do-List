@@ -67,7 +67,7 @@ function ToDoList() {
                 labelText=""
                 checked={task.completed}
                 onChange={() => taskCompleted(index)}
-                style={{ borderRadius: '5px' }}
+                style={{ cursor: 'pointer' }}
               />
               )
             }

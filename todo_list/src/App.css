@@ -20,7 +20,7 @@ body {
 
 .App-header {
   background-color: #282c34;
-  min-height: 100vh;
+  min-height: 250vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -62,15 +62,11 @@ body {
 .addTask {
   display: flex;
   justify-content: space-between;
-  width: 50%;
+  width: 60%;
   margin: auto;
   margin-bottom: 3rem;
- 
 }
 
-.checkbox {
-  
-}
 
 .deleteBtn {
   background-color: red;
@@ -79,12 +75,16 @@ body {
   cursor: pointer;
   color: white;
   padding: 10px;
+  max-height: 35px;
 }
 
 .taskBtn {
   background-color: green;
   border: none;
   border-radius: 5px;
+  margin-left: 5px;
+  min-width: 35%;
+  max-width: 40%;
   cursor: pointer;
   color: white;
 }
@@ -113,9 +113,50 @@ body {
   justify-content: flex-start;
   color: white;
   margin-right: 10px;
-  width: 70%;
-  overflow: hidden;       /* Skrije vsebino, ki presega element */
-  text-overflow: ellipsis; /* Dodaj tri pike (...) za presežek besedila */
-  white-space: nowrap;    /* Prepreči prelom besedila v novo vrstico */
+  width: 70%; 
+  overflow: hidden;       
+  text-overflow: ellipsis; 
+  white-space: nowrap;
 }
+
+
+
+@media only screen and (max-width: 1520px) {
+  .container {
+    width: 40%;
+  }
+}
+
+
+@media only screen and (max-width: 1150px) {
+  .container {
+    width: 50%;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .container {
+    width: 65%;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .container {
+    width: 80%;
+  }
+}
+
+
+@media only screen and (max-width: 580px) {
+  .container {
+    width: 90%;
+  }
+
+  .taskName {
+    width: 60%;
+    overflow: none;       
+    white-space: normal;    
+  }
+}
+
 
