@@ -1,57 +1,71 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from 'react';
+import { TextInput, Button, Checkbox, ListItem, UnorderedList, FluidForm } from 'carbon-components-react';
+import './App.css';
 
-let taskId = 0;
+const LOCAL_STORAGE_KEY = "tasks"
 
 function ToDoList() {
-    
-    const [tasks, setTasks] = useState([ { id: taskId, name: "First Task" },]);
-    const [inputValue, setInputValue] = useState("");
+  const [tasks, setTasks] = useState(() => {
+    return JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || []
+  });
+  const [task, setTask] = useState("");
 
 
-    const deleteTask = (id) => {
-        setTasks(tasks.filter(task => task.id !== id));
-    };
 
-    return (
-    <div>
+  useEffect(() => {
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(tasks));
+  }, [tasks]);
 
-        <h1> TO DO LIST</h1>
-        
-        <input className="taskInput" value={inputValue}
-        onChange={e => setInputValue(e.target.value)} placeholder="insert task" />
-        <button onClick={() => {
-        setTasks([
-          ...tasks,
-          { id: ++taskId, name: inputValue }
-        ]);
-        
-      }}>Add</button>
+ 
 
-    
-      {tasks.length > 0 ? ( 
-         <ul>
-         {tasks.map(task => ( 
-            <div>
-                <li key={task.id}> {task.name} </li>
-                <button onClick={() => deleteTask(task.id)}>DELETE</button>
-            </div>
-           
-         ))}
-         
-       </ul>
-      ) : (
-       <p> No tasks yet </p>
-      )
-      
+  const addTask = () => {
+    if (task.trim() !== "") {
+      setTasks([...tasks, { text: task, completed: false }]);
     }
+  };
 
-    
-   
-        
+  const taskCompleted = index => {
+    const newTasks = [...tasks];
+    newTasks[index].completed = !newTasks[index].completed;
+    setTasks(newTasks);
+  };
 
+  const deleteTask = index => {
+    const newTasks = tasks.filter((_, i) => i !== index);
+    setTasks(newTasks);
+  };
 
+  return (
+    <div className="App">
+      <h1>To-Do List</h1>
+      <TextInput
+        id="task-input"
+        placeholder="Insert task"
+        labelText=""
+        value={task}
+        onChange={(e) => setTask(e.target.value)}
+      />
+      <Button onClick={addTask}>Add Task</Button>
 
-    </div>);
+      {tasks.length !== 0 ? (
+          tasks.map((task, index) => (
+            <ListItem key={index}>
+              {task.text}
+              <Checkbox
+                id={`task-${index}`}
+                labelText={task.text}
+                checked={task.completed}
+                onChange={() => taskCompleted(index)}
+              />
+              <Button onClick={() => deleteTask(index)}>Delete</Button>
+            </ListItem>
+          ))
+       
+      ) : (
+        <p>No tasks yet</p>
+      )}
+    </div>
+  );
 }
 
-export default ToDoList
+export default ToDoList;
